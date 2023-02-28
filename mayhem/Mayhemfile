@@ -1,0 +1,9 @@
+project: ChemDataExtractor
+target: fuzz-chem
+testsuite:
+    - file://mayhem/testsuite
+
+cmds:
+  - cmd: /src/mayhem/fuzz_chem.py
+    libfuzzer: true
+    timeout: 12
