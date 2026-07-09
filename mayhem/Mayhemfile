@@ -1,0 +1,14 @@
+# Mayhem target: ChemDataExtractor document reader / parser (Atheris/libFuzzer harness).
+# The cmd binary is the compiled ELF launcher that drives mayhem/fuzz_chem.py; Atheris instruments
+# the chemdataextractor package so the run records coverage (edges). The harness exercises the pure
+# parsing entry point Document.from_string (no NLP model downloads → fully air-gapped).
+project: ChemDataExtractor
+target: fuzz-chem
+
+cmds:
+  - cmd: /mayhem/chemdataextractor_fuzzer
+    libfuzzer: true
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz-chem/testsuite  # per-target starter seeds
